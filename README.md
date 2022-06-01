@@ -1,5 +1,5 @@
 # Launching an Exius Server
-In order to launch an Exius server, you will need access to some container SaaS platform (AWS Lightsail, Fly.io, etc) or a virtual machine (on AWS, vultr, linode, etc). In my personal opinion, the most streamlined platform to use is Fly.io. This guide will go through setting up an Exius server using the container service Fly.io and on an AWS virtual machine.  
+In order to launch an Exius server, you will need access to some container SaaS platform (AWS Lightsail, Fly.io, digital ocean, etc) or a virtual machine (on AWS EC2, vultr, linode, etc). In my personal opinion, the most streamlined platform to use is Fly.io. This guide will go through setting up an Exius server using the container service Fly.io and on an AWS virtual machine.  
 ## Setting Up a Cloud Storage Provider With Rclone
 If you wish to not connect to an external cloud storage provider, and instead use the data folder on the server, you may skip the rclone steps.
 
@@ -34,7 +34,7 @@ Then start the process of launching on fly.io
 fly launch --remote-only
 ```
 
-When prompted create a unique name for your app. Then when prompted if you want to create and attatch a Postgres instance press yes. The creation of the postgres instance will take a little while. After the postgres instance is created, you will be asked if you want to launch the app now. You should press no.
+When prompted, create a unique name for your app. Then when asked if you want to create and attatch a Postgres instance press yes. The creation of the postgres instance will take a little while. After the postgres instance is created, you will be asked if you want to launch the app now. You should press no.
 
 Then go into the created fly.toml file and add the environmnent variables for ADMIN_KEY and CONFIGNAME replacing the values with your own. So, the env section will look something like:
 ```
@@ -48,7 +48,7 @@ Then deploy the app
 fly deploy --remote-only
 ```
 
-After waiting for it to deploy, you should be all set! To check on the instance, you can view the logs by 
+After waiting for it to finish deploying, you should be all set! To check on the instance, you can view the logs by 
 ```shell
 fly logs
 ```
