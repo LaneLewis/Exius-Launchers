@@ -1,17 +1,21 @@
 version: "3"
 services:
   exius:
-    build: ./
+    image: ghcr.io/lanelewis/exius:latest
     environment:
-      CONFIGNAME: example
-      ADMINKEY: example
+      CONFIGNAME: data
+      ADMINKEY: 81j091s
       DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
-      VIRTUAL_HOST: subdomain.domain
-      LETSENCRYPT_HOST: subdomain.domain
-      LETSENCRYPT_EMAIL: example@email.com
-      VIRTUAL_PORT: 80
-    ports:
-      - "8080:8080"
+      VIRTUAL_HOST: exius.lrlewis.com
+      LETSENCRYPT_HOST: exius.lrlewis.com
+      LETSENCRYPT_EMAIL: lrlewis@andrew.cmu.edu
+    expose:
+      - 8080
+    networks:
+      - service_network
+    volumes:
+      - ~/rclone:/root/.config/rclone
+      - ~/data:/app/data
   db:
     image: postgres
     restart: always
@@ -19,6 +23,10 @@ services:
       POSTGRES_PASSWORD: "postgres"
     expose:
       - 5432
+    networks:
+      - service_network
+    volumes:
+      - db-data:/var/lib/postgresql/data
   nginx-proxy:
     image: jwilder/nginx-proxy:alpine
     ports:
@@ -50,6 +58,7 @@ services:
 networks:
   service_network:
 volumes:
+  db-data:
   nginx-certs:
   nginx-vhost:
   nginx-html:
