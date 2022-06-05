@@ -1,5 +1,5 @@
 # Launching an Exius Server
-In order to launch an Exius server, you will need access to some container SaaS platform (AWS Lightsail, Fly.io, digital ocean, etc) or a virtual machine (on AWS EC2, vultr, linode, etc). In my personal opinion, the most streamlined platform to use is Fly.io. This guide will go through setting up an Exius server using the container service Fly.io and on an AWS virtual machine. The documentation for Rclone can be found [here](https://rclone.org/install/) and fly.io can be found [here](https://fly.io/docs/getting-started/installing-flyctl/).
+In order to launch an Exius server, you will need access to some container SaaS platform (AWS Lightsail, Fly.io, digital ocean, etc) or a virtual machine (on AWS EC2, vultr, linode, etc). In my personal opinion, the most streamlined platform to use is Fly.io. This guide will go through setting up an Exius server using the container service Fly.io and on a virtual machine (loosely tailored to AWS). The documentation for Rclone can be found [here](https://rclone.org/install/) and fly.io can be found [here](https://fly.io/docs/getting-started/installing-flyctl/).
 
 ## Quick Setup on Linux/Mac using Fly.io
 First clone this repository onto your local machine and place your current
