@@ -4,7 +4,7 @@ services:
     image: ghcr.io/lanelewis/exius:latest
     environment:
       CONFIGNAME: data
-      ADMINKEY: 1234
+      ADMINKEY: your-admin-key
       DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
     ports:
       - 80:8080
