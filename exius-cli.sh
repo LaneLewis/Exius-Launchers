@@ -1,5 +1,8 @@
 #!/bin/sh
+
 set -e
+
+#redeploys exius on fly.io, needs an rclone remote name to renew
 fly_redeploy_exius()
 {
     remote=$1
@@ -8,6 +11,7 @@ fly_redeploy_exius()
     echo $(fly deploy --remote-only)
 }
 
+#installs flyctl and adds it to the user's bash profile
 install_fly()
 {
     echo $(curl -L https://fly.io/install.sh | sh)
@@ -16,11 +20,7 @@ install_fly()
     echo 'export PATH="$FLYCTL_INSTALL/bin:$PATH"'>> ~/.bash_profile
 }
 
-install_rclone()
-{
-    echo $(curl https://rclone.org/install.sh | sudo sh)
-}
-
+# installs docker on machine, needs a package manager name passed in
 vm_docker_install()
 {
     pkg=$1
@@ -30,6 +30,9 @@ vm_docker_install()
     sudo chmod -v +x /usr/local/bin/docker-compose
 }
 
+#goes into a server and installs docker/docker-compose, copies in an rclone config, and starts the containers.
+# requires a path to the server pem file, the dns of the server, and optional flags for the user to use
+# as well as the package manager of the linux instance. 
 vm_exius_up()
 {
     function help(){
@@ -60,6 +63,9 @@ vm_exius_up()
     echo $(ssh -i $pem $u@$dns "docker-compose -f docker-compose-https.yml up")
 }
 
+#renews an rclone remote with a web browser prompt, then copies the new config and the local http compose file
+#into the container and restarts the containers. requires a path to the server pem file, the dns of the server, and optional flags for the user to use
+# as well as the package manager of the linux instance. 
 vm_exius_redeploy()
 {
     pem=$1
