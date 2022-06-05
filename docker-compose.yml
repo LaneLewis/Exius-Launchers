@@ -1,13 +1,18 @@
 version: "3"
 services:
   exius:
-    build: ./
+    image: ghcr.io/lanelewis/exius:latest
     environment:
-      - CONFIGNAME={...}
-      - ADMINKEY={...}
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+      CONFIGNAME: data
+      ADMINKEY: 1234
+      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
     ports:
-      - "8080:443"
+      - 80:8080
+    networks:
+      - service_network
+    volumes:
+      - ./data:/app/data
+      - ./rclone:/root/.config/rclone
   db:
     image: postgres
     restart: always
@@ -15,3 +20,11 @@ services:
       POSTGRES_PASSWORD: "postgres"
     expose:
       - 5432
+    networks:
+      - service_network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+networks:
+  service_network:
+volumes:
+  db-data:
