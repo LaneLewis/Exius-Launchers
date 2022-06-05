@@ -63,7 +63,7 @@ This will create open a web browser window to authenticate again to the remote. 
 ## Quick Setup on linux/mac for Non-https Enabled VM
 For the quick setup, you will need a pem file for ssh-ing onto the server and a class A subdomain on the ipv4 address of the web server. Ports 443, 80, and 22 will need to be open on this server. The defaults for several functions are using the linux AMI 2 machine on AWS, however other VMs can be used by passing flags to a couple functions.
 
-To begin clone the Exius-Launchers repository into a local directory and move into the repository.
+To begin, clone the Exius-Launchers repository into a local directory and move into the repository.
 ```shell
 git clone https://github.com/LaneLewis/Exius-Launchers
 cd ./Exius-Launchers
@@ -84,13 +84,13 @@ rclone config
 ```
 and create a new one for your chosen cloud storage provider (generally choosing just the defaults is fine). Then run the following with optional flags:
 ```shell
-./exius-cli.sh vm_exius_up [your-pem-file-path] [your-dns] -u [user for ssh, defaults to ec2-user] -p [package manager, default yum]
+./exius-cli.sh vm_exius_up [your-pem-file-path] [your-dns] -u <user for ssh, defaults to ec2-user> -p <package manager, default yum>
 ```
 This will go into the VM, download docker etc and get the docker compose containers up and going with a free lets-encrypt https certificate. At this point, assuming everything installs correctly, your personal exius server is up and going! 
 # Bug Fixing
 Just like in fly.io, the most likely error you will recieve is if an Rclone refresh token fails to renew properly. To reboot the containers (don't worry you won't lose any information) with an updated rclone config or modified envs in docker-compose-https, run:
 ```shell
-./exius-cli.sh vm_exius_redeploy [your-pem-file-path] [your-dns] -u [user for ssh, defaults to ec2-user] -p [package manager, default yum]
+./exius-cli.sh vm_exius_redeploy [your-pem-file-path] [your-dns] -u <user for ssh, defaults to ec2-user> -p <package manager, default yum>
 ```
 If you need to view the server logs, the easiest way is to ssh into the server and run 
 ```docker-compose logs```
