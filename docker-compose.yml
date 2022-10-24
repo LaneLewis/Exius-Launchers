@@ -4,15 +4,14 @@ services:
     image: ghcr.io/lanelewis/exius:latest
     environment:
       CONFIGNAME: data
-      ADMINKEY: your-admin-key
+      ADMINKEY: 1234
       DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
     ports:
-      - 80:8080
+      - 8080:8080
     networks:
       - service_network
     volumes:
       - ./data:/app/data
-      - ./rclone:/root/.config/rclone
   db:
     image: postgres
     restart: always
